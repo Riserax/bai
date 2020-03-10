@@ -20,8 +20,18 @@
     </ol>
 
     <script>
-    	// a JavaScript code here ...
+        var input = document.getElementsByTagName("input")[0]
+    	var button = document.getElementsByTagName("button")[0]
+        var ol = document.getElementsByTagName("ol")[0]
 
+        button.onclick = function() {
+            var inputValue = input.value
+            var li = document.createElement("li")
+            var newTodo = document.createTextNode(inputValue)
+            li.appendChild(newTodo)
+            ol.append(li)
+            input.value = ""
+        }
     </script>
 </body>
 
