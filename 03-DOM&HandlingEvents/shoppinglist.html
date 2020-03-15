@@ -4,6 +4,7 @@
 <head>
     <title>Shopping List</title>
     <meta charset="UTF-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -32,6 +33,10 @@
             ol.append(li)
             input.value = ""
         }
+
+        $(document).on('dblclick', 'ol li', function(){
+            $(this).closest('li').remove()
+        })
     </script>
 </body>
 

@@ -6,8 +6,34 @@
 	</head>
 	<body>
 		<script>
-			// a JavaScript code here ...
-			
+			for (var i=2; i>=1; i--) {
+				let t = document.createElement("table")
+				t.setAttribute("id", "table")
+
+				document.body.appendChild(t)
+				let table = document.getElementById("table")
+
+				let row = table.insertRow(0)
+				let cell1 = row.insertCell(0)
+				let cell2 = row.insertCell(1)
+
+				cell1.innerHTML = i*2-1
+				cell2.innerHTML = i*2
+
+				table.style.borderCollapse = "collapse"
+
+				cell1.style.border = "1px solid black"
+				cell1.style.paddingLeft = "50px"
+				cell1.style.paddingRight = "50px"
+				cell1.style.paddingTop = "3px"
+				cell1.style.paddingBottom = "3px"
+
+				cell2.style.border = "1px solid black"
+				cell2.style.paddingLeft = "50px"
+				cell2.style.paddingRight = "50px"
+				cell2.style.paddingTop = "3px"
+				cell2.style.paddingBottom = "3px"
+			}
 		</script>
 	</body>
 </html>

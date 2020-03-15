@@ -23,8 +23,22 @@
 		<textarea rows="15" cols="50"></textarea><br>
 		
 		<script>
-			// a JavaScript code here ...
-			
+			var textarea = document.getElementsByTagName("textarea")[0]
+			textarea.oninput = function() {
+				window.setTimeout(showResults, 30000);
+				function showResults() {
+					let textareaValue = textarea.value
+					let chars = textareaValue.length
+					let words = textareaValue.match(/\S+/g).length
+
+					let p = document.createElement("p")
+					let textNode = document.createTextNode("You managed to type " + chars 
+						+ " characters and " + words + " words.")
+
+					p.appendChild(textNode)
+					document.body.appendChild(p)
+				}
+			}
 		</script>
 		
 	</body>

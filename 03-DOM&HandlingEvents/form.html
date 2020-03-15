@@ -15,10 +15,18 @@
 	</form>
 
 	<script>
-		// a JavaScript code here ...
 		var university = "Cracow University of Economics";
 		var address = "Rakowicka 27, Krakow, POLAND";
+		var button = document.getElementsByTagName("button")[0]
+		var universityInput = document.getElementsByTagName("input")[0]
+		var addressInput = document.getElementsByTagName("input")[1]
 
+		button.onclick = function() {
+			universityInput.setAttribute("value", university)
+			universityInput.setAttribute("size", "25")
+			addressInput.setAttribute("value", address)
+			addressInput.setAttribute("size", "25")
+		}
 	</script>
 </body>
 
