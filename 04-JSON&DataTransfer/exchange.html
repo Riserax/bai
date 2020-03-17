@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Currency exchange</title>
+        <meta charset="UTF-8">
+        <style>
+            table {
+                text-align: center;
+                border-collapse: collapse;
+            }
+            td {
+                width: 90px;
+                border: 1px solid;
+            }
+            .head {
+                font-weight: bold;
+            }
+        </style>
+	</head>
+	<body>
+        <table>
+            <thead>Current <b>EUR</b> exchange rates:</thead>
+            <tr>
+                <td class="head">BID</td>
+                <td class="head">ASK</td>
+            </tr>
+            <tr>
+                <td id="eurBid"></td>
+                <td id="eurAsk"></td>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <thead>Current <b>USD</b> exchange rates:</thead>
+            <tr>
+                <td class="head">BID</td>
+                <td class="head">ASK</td>
+            </tr>
+            <tr>
+                <td id="usdBid"></td>
+                <td id="usdAsk"></td>
+            </tr>
+        </table>
+        <br>
+        <table>
+            <thead>Current <b>GBP</b> exchange rates:</thead>
+            <tr>
+                <td class="head">BID</td>
+                <td class="head">ASK</td>
+            </tr>
+            <tr>
+                <td id="gbpBid"></td>
+                <td id="gbpAsk"></td>
+            </tr>
+        </table>
+
+		<script>
+            var getCurrencyRate = (a) => {
+                var xhr = new XMLHttpRequest()
+                xhr.onreadystatechange = function() {
+                    if (this.readyState == 4 && this.status == 200) {
+                        var response = xhr.responseText
+                        var obj = JSON.parse(response)
+                        console.log(obj)
+                        let elemBidId = a + "Bid"
+                        let elemAskId = a + "Ask"
+                        document.getElementById(elemBidId).innerHTML = obj.rates[0].bid
+                        document.getElementById(elemAskId).innerHTML = obj.rates[0].ask
+                    }
+                }
+                xhr.open('GET', 'http://api.nbp.pl/api/exchangerates/rates/c/' + a + '?format=json', true)
+                xhr.send()
+            }
+
+            getCurrencyRate('eur')
+            getCurrencyRate('usd')
+            getCurrencyRate('gbp')
+        </script>
+	</body>
+</html>

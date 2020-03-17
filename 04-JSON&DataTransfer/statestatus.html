@@ -14,14 +14,17 @@
 				var method = 'GET';
 				var URL = 'http://api.nbp.pl/api/cenyzlota/last/30/?format=json';
 				var xhr = new XMLHttpRequest();
-				xhr.onreadystatechange = function(){display(this);};
+				xhr.onreadystatechange = function(){display(this, xhr);};
 				xhr.open(method, URL);
 				xhr.send();
 			}
-			function display(r){
+			function display(r, xhr){
 				console.log("Request state:", r.readyState);
 				console.log("Status:", r.status);
 				console.log("Status text:", r.statusText);
+				if (r.readyState == 4 && r.status == 200) {
+					console.log("Request data:", xhr.responseText)
+				}
 				console.log("-----");
 			};
 		</script>

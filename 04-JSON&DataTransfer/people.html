@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>People</title>
+        <meta charset="UTF-8">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+        <style>td {text-align: center;}</style>
+	</head>
+	<body>
+        <input type="button" value="Display people">
+        <br><br>
+        <table id="table" class="display" style="width:100%; display:none">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Age</th>
+                    <th>Country</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Age</th>
+                    <th>Country</th>
+                    <th>Email</th>
+                </tr>
+            </tfoot>
+        </table>
+
+		<script>
+			var button = document.getElementsByTagName("input")[0]
+            var table = document.getElementById("table")
+
+			button.onclick = function() {
+                table.style.display = ''
+
+                $(document).ready(function() {
+                    $('#table').DataTable( {
+                        "ajax": "people.json",
+                        "columns": [
+                            { "data": "name" },
+                            { "data": "surname" },
+                            { "data": "age" },
+                            { "data": "country" },
+                            { "data": "email" }
+                        ]
+                    } );
+                } );
+			}
+		</script>
+
+	</body>
+</html>
