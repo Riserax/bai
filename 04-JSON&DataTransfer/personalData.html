@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Personal data</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+<body>
+    <input id="button" type="button" value="Show personal data">
+
+    <script>
+        const button = document.getElementById("button")
+
+        button.onclick = function() {
+            const xhr = new XMLHttpRequest()
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    const response = xhr.responseText
+                    const obj = JSON.parse(response)
+                    jQuery.each(obj, function(i, val) {
+                        var p = document.createElement("p")
+                        p.innerHTML = `${val.name} ${val.surname.toUpperCase()}, ${val.age}, ${val.country}, ${val.email}`
+                        document.body.appendChild(p)
+                    });
+                }
+            }
+            xhr.open('GET', 'people.json', true)
+            xhr.send()
+        }
+    </script>
+</body>
+</html>

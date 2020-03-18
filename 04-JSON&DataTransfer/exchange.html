@@ -56,12 +56,11 @@
 
 		<script>
             var getCurrencyRate = (a) => {
-                var xhr = new XMLHttpRequest()
+                const xhr = new XMLHttpRequest()
                 xhr.onreadystatechange = function() {
                     if (this.readyState == 4 && this.status == 200) {
-                        var response = xhr.responseText
-                        var obj = JSON.parse(response)
-                        console.log(obj)
+                        const response = xhr.responseText
+                        const obj = JSON.parse(response)
                         let elemBidId = a + "Bid"
                         let elemAskId = a + "Ask"
                         document.getElementById(elemBidId).innerHTML = obj.rates[0].bid

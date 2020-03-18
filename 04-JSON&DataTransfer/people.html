@@ -10,8 +10,6 @@
         <style>td {text-align: center;}</style>
 	</head>
 	<body>
-        <input type="button" value="Display people">
-        <br><br>
         <table id="table" class="display" style="width:100%; display:none">
             <thead>
                 <tr>
@@ -22,6 +20,7 @@
                     <th>Email</th>
                 </tr>
             </thead>
+            <tbody id="body"></tbody>
             <tfoot>
                 <tr>
                     <th>Name</th>
@@ -34,25 +33,41 @@
         </table>
 
 		<script>
-			var button = document.getElementsByTagName("input")[0]
-            var table = document.getElementById("table")
+            const table = document.getElementById("table")
+            const body = document.getElementById("body")
 
-			button.onclick = function() {
+            const xhr = new XMLHttpRequest()
+            xhr.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    const response = xhr.responseText
+                    const obj = JSON.parse(response)
+                    jQuery.each(obj, function(i, val) {
+                        createRow(val)
+                    });
+                }
+            }
+            xhr.open('GET', 'people.json', true)
+            xhr.send()
+
+            var createRow = (val) => {
+                let row = body.insertRow(0)
+                let cell1 = row.insertCell(0)
+                let cell2 = row.insertCell(1)
+                let cell3 = row.insertCell(2)
+                let cell4 = row.insertCell(3)
+                let cell5 = row.insertCell(4)
+
+                cell1.innerHTML = val.name
+                cell2.innerHTML = val.surname
+                cell3.innerHTML = val.age
+                cell4.innerHTML = val.country
+                cell5.innerHTML = val.email
+            }
+
+            $(document).ready(function () {
                 table.style.display = ''
-
-                $(document).ready(function() {
-                    $('#table').DataTable( {
-                        "ajax": "people.json",
-                        "columns": [
-                            { "data": "name" },
-                            { "data": "surname" },
-                            { "data": "age" },
-                            { "data": "country" },
-                            { "data": "email" }
-                        ]
-                    } );
-                } );
-			}
+                $('#table').DataTable();
+            });
 		</script>
 
 	</body>
